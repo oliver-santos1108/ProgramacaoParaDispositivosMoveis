@@ -16,17 +16,29 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.598" />
 
     <Button
-        android:id="@+id/Button"
+        android:id="@+id/btnAnterior"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Voltar"
+        app:layout_constraintBottom_toBottomOf="@+id/btnProximo"
+        app:layout_constraintEnd_toStartOf="@+id/btnProximo"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextView" />
+        app:layout_constraintTop_toTopOf="@+id/btnProximo" />
+
+    <Button
+        android:id="@+id/btnProximo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Avançar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnAnterior"
+        tools:layout_editor_absoluteY="639dp" />
 
     <EditText
         android:id="@+id/edmin"
@@ -50,5 +62,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/edmin" />
+
+    <TextView
+        android:id="@+id/tvInserirKg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Insira seu peso (kg):"
+        app:layout_constraintBottom_toTopOf="@+id/edmin"
+        tools:layout_editor_absoluteX="13dp" />
+
+    <TextView
+        android:id="@+id/tvInserirAl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Insira sua altura (m):"
+        app:layout_constraintBottom_toTopOf="@+id/edmax"
+        tools:layout_editor_absoluteX="221dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="758dp"
+        android:layout_height="335dp"
+        app:srcCompat="@drawable/perfil"
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="274dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
