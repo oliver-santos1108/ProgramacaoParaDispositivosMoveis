@@ -11,13 +11,14 @@
         android:id="@+id/TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Seu IMC:"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.598" />
+        app:layout_constraintVertical_bias="0.82" />
 
     <Button
         android:id="@+id/btnAnterior"
@@ -34,11 +35,12 @@
         android:id="@+id/btnProximo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
         android:text="Avançar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnAnterior"
-        tools:layout_editor_absoluteY="639dp" />
+        app:layout_constraintStart_toEndOf="@+id/btnAnterior" />
 
     <EditText
         android:id="@+id/edmin"
@@ -50,7 +52,30 @@
         app:layout_constraintEnd_toStartOf="@+id/edmax"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.233" />
+
+    <TextView
+        android:id="@+id/tvInserirAl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Insira sua altura (m):"
+        app:layout_constraintBottom_toTopOf="@+id/edmax"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.569"
+        app:layout_constraintStart_toEndOf="@+id/tvInserirKg" />
+
+    <TextView
+        android:id="@+id/tvInserirKg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Insira seu peso (kg):"
+        app:layout_constraintBottom_toTopOf="@+id/edmin"
+        app:layout_constraintEnd_toStartOf="@+id/edmax"
+        app:layout_constraintHorizontal_bias="0.168"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/edmax"
@@ -61,30 +86,18 @@
         app:layout_constraintBottom_toBottomOf="@+id/edmin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/edmin" />
+        app:layout_constraintStart_toEndOf="@+id/edmin"
+        app:layout_constraintTop_toTopOf="@+id/edmin" />
 
-    <TextView
-        android:id="@+id/tvInserirKg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Insira seu peso (kg):"
-        app:layout_constraintBottom_toTopOf="@+id/edmin"
-        tools:layout_editor_absoluteX="13dp" />
-
-    <TextView
-        android:id="@+id/tvInserirAl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Insira sua altura (m):"
-        app:layout_constraintBottom_toTopOf="@+id/edmax"
-        tools:layout_editor_absoluteX="221dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="758dp"
-        android:layout_height="335dp"
-        app:srcCompat="@drawable/perfil"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="274dp" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="374dp"
+        android:layout_height="234dp"
+        android:src="@drawable/perfil"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
