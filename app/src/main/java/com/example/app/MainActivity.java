@@ -2,6 +2,7 @@ package com.example.app;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -25,43 +26,67 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
     Button button;
     ListView listView;
-
-    SQLiteDatabase dataBase; //declara variável do tipo SQLiteDatabase
+    SQLiteDatabase db; //declara variável do tipo SQLiteDatabase
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dataBase = openOrCreateDatabase("notinahs", MODE_PRIVATE, null);
-        dataBase.execSQL("CREATE TABLE IF NOT EXISTS notas " +
-                "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "titulo VARCHAR, conteudo VARCHAR)");
         setContentView(R.layout.activity_main);
         editText = findViewById(R.id.editText);
         button = findViewById(R.id.button);
         listView = findViewById(R.id.listView);
-        button.setOnClickListener(view -> {
+
+        button.setOnClickListener(view ->{
             String titulo = editText.getText().toString();
-            ContentValues values = new ContentValues();
-            values.put("titulo", titulo);
+            ContentValues cv = new ContentValues();
+            cv.put("titulo", titulo);
 
-            int id = (int) dataBase.insert("notinhas", null, values);
+            int status = (int) db.insert("notinhas", null, cv); //cast "(int)" - mudança explicita de tipo de variavel
 
-            if (id > 0) {
-                Toast.makeText(getApplicationContext(),
-                        "Nota salva com sucesso",
-                        Toast.LENGTH_SHORT).show();
+            String msgStatus;
+            if (status > 0) {
+                        msgStatus="Nota salva com sucesso! "+status;
+                        editText.setText("");
+                        editText.requestFocus();
+
             } else {
-                Toast.makeText(getApplicationContext(),
-                        "Erro ao salvar nota",
-                        Toast.LENGTH_SHORT).show();
+                        msgStatus="Erro ao inserir a nota! "+status;
             }
+            Toast.makeText(getApplicationContext(),msgStatus,Toast.LENGTH_LONG).show();
         });
+        setup();
+        listarNotas();
+    }
+
+    public void setup() {
+        db = openOrCreateDatabase("bdnotas", MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS notas " +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "titulo VARCHAR, txt VARCHAR)");
+
+        listarNotas();
 
     }
-    public void listarNotas() {
-        dataBase.rawQuery("SELECT * FROM notas LIMIT ?", new String[]{"100"});
 
+    //aula 1 sqlite 16/10
+    public void listarNotas() {
+        Cursor cursor = db.rawQuery("SELECT * FROM notas LIMIT ?", new String[]{"100"});
+        cursor.moveToFirst();
+        ArrayList<String> notas = new ArrayList<>();
+        while(!cursor.isAfterLast()){
+            String s = cursor.getString((int)cursor.getColumnIndex("titulo")); //cast "(int)" - mudança explicita de tipo de variavel
+            cursor.moveToNext();
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                getApplicationContext(),
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                notas
+        );
+        listView.setAdapter(adapter);
     }
 }
+
 
