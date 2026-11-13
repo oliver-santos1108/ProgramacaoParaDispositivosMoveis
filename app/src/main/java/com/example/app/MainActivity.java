@@ -1,8 +1,13 @@
 package com.example.app;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    SQLiteDatabase db; //declara variável do tipo SQLiteDatabase
+    TextView tvSensor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,23 +29,19 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        setup();
-    }
-    public void setup(){
+        tvSensor=findViewById(R.id.tvSensor);//colocar no main activity
+        SensorManager sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        Sensor sensor = sm.getDefaultSensor(Sensor.TYPE_LIGHT);
+        sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST);
 
-        /*tudo dentro desse metodo eu fiz da minha cabeça, conferir com o professor depois*/
-
-        //criar banco
-        db = openOrCreateDatabase("escola", MODE_PRIVATE, null);
-        //criar tabela notas
-        db.execSQL("CREATE TABLE IF NOT EXISTS notas " +
-                "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "titulo VARCHAR, conteudo VARCHAR)");
-        //criar tabela alunos
-        db.execSQL("CREATE TABLE IF NOT EXISTS alunos " +
-                "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "nome VARCHAR, cpf VARCHAR, anoNasc INT)");
     }
+    @Override
+    public void onSensorChanged(SensorEvent event){
+        float v=event.values[0];
+        tvSensor.setText(Float.toString(v));
+    }
+
+
 
 }
 
