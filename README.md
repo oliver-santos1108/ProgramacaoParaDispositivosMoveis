@@ -9,7 +9,7 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 - Você tem uma máquina com Android Studio instalado. 
 
-## Instalando 
+## 🚀 Instalação
 
 Para instalar o projeto, siga estas etapas:
 
