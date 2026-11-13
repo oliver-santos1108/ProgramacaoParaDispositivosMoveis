@@ -9,7 +9,7 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 - Você tem uma máquina com Android Studio instalado. 
 
-## 🚀 Instalando IFSC_60+
+## Instalando 
 
 Para instalar o projeto, siga estas etapas:
 
